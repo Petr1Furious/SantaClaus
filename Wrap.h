@@ -14,6 +14,8 @@ public:
     virtual Object* openMe();
 
     ~Wrap() override = default;
+
+    void Serialize(pugi::xml_node node) override;
 };
 
 class Box : public Wrap {
@@ -27,11 +29,15 @@ public:
     Object* openMe() override;
 
     void closeMe();
+
+    void Serialize(pugi::xml_node node) override;
 };
 
 class GiftPaper : public Wrap {
 public:
     explicit GiftPaper(std::string title) : Wrap(std::move(title)) {}
+
+    void Serialize(pugi::xml_node node) override;
 };
 
 Object* MyUnitTests(Object** objects);

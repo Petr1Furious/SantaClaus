@@ -2,6 +2,7 @@
 #include "Tables.h"
 #include "ConveyorBelts.h"
 #include "PapaXmasElf.h"
+#include "include/pugixml.hpp"
 
 int main() {
     ITable* table = createTableRand();

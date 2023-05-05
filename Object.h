@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include <utility>
+#include <ostream>
+#include "include/pugixml.hpp"
 
 class Object {
     std::string title;
@@ -9,14 +10,11 @@ class Object {
 public:
     explicit Object(std::string title) : title(std::move(title)) {}
 
-    std::string& getTitle() {
-        return title;
-    }
+    std::string& getTitle();
 
-    friend std::ostream& operator<<(std::ostream& stream, const Object& object) {
-        stream << object.title;
-        return stream;
-    }
+    friend std::ostream& operator<<(std::ostream& stream, const Object& object);
+
+    virtual void Serialize(pugi::xml_node node);
 
     virtual ~Object() = default;
 };

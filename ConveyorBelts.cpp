@@ -45,6 +45,9 @@ void ConveyorBeltRand::out() {
         std::cerr << "Conveyor belt is empty!\n";
         return;
     }
+    pugi::xml_document doc;
+    content->Serialize(doc.append_child());
+    doc.save(std::cout);
 
     delete content;
     content = nullptr;
