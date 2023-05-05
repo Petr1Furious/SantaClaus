@@ -1,6 +1,11 @@
 #include <chrono>
 #include <random>
+#include <sstream>
+#include <boost/asio.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 #include "ConveyorBelts.h"
+
+using boost::asio::ip::udp;
 
 void PapaXmasConveyorBelt::in() {
     if (content != nullptr) {
@@ -56,4 +61,38 @@ void ConveyorBeltRand::out() {
 
 IConveyorBelt* createConveyorBeltRand() {
     return dynamic_cast<IConveyorBelt*>(new ConveyorBeltRand());
+}
+
+void MagicalCarpet::out() {
+    if (content == nullptr) {
+        std::cerr << "Magical carpet is empty!\n";
+        return;
+    }
+
+    pugi::xml_document doc;
+    content->Serialize(doc.append_child());
+
+    std::stringstream ss;
+    doc.save(ss);
+
+    boost::asio::io_service service;
+    udp::socket socket(service);
+
+    int32_t port = 13131;
+    socket.open(udp::v4());
+    socket.set_option(udp::socket::reuse_address(true));
+    socket.bind(udp::endpoint(boost::asio::ip::address_v4::any(), port));
+
+    boost::asio::ip::address address = boost::asio::ip::address::from_string(ip);
+    socket.set_option(boost::asio::ip::multicast::join_group(address));
+
+    udp::endpoint destination(address, port);
+    socket.send_to(boost::asio::buffer(ss.str()), destination);
+
+    delete content;
+    content = nullptr;
+}
+
+IConveyorBelt* createMagicalCarpet(std::string ip) {
+    return dynamic_cast<IConveyorBelt*>(new MagicalCarpet(std::move(ip)));
 }

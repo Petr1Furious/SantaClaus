@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "IConveyorBelt.h"
 
 class PapaXmasConveyorBelt : public IConveyorBelt {
@@ -17,3 +19,14 @@ public:
 };
 
 IConveyorBelt* createConveyorBeltRand();
+
+class MagicalCarpet : public ConveyorBeltRand {
+    std::string ip;
+
+public:
+    explicit MagicalCarpet(std::string ip) : ip(std::move(ip)) {}
+
+    void out() override;
+};
+
+IConveyorBelt* createMagicalCarpet(std::string ip);

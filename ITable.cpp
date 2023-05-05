@@ -32,11 +32,10 @@ Object* ITable::take(size_t num) {
 }
 
 std::string* ITable::look() const {
-    auto* titles = new std::string[size + 1];
+    auto* titles = new std::string[size + 1]{};
     for (size_t i = 0; i < size; i++) {
         titles[i] = objects[i]->getTitle();
     }
-    titles[size] = nullptr;
     return titles;
 }
 
