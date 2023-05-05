@@ -1,14 +1,17 @@
 #pragma once
 
-#include <string>
-#include <ostream>
 #include "include/pugixml.hpp"
+#include <ostream>
+#include <string>
 
 class Object {
     std::string title;
 
 public:
-    explicit Object(std::string title) : title(std::move(title)) {}
+    explicit Object(std::string title)
+        : title(std::move(title))
+    {
+    }
 
     std::string& getTitle();
 

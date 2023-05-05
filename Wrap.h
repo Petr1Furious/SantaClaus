@@ -1,13 +1,16 @@
 #pragma once
 
-#include <stdexcept>
 #include "Object.h"
+#include <stdexcept>
 
 class Wrap : public Object {
-    Object* content{};
+    Object* content {};
 
 public:
-    explicit Wrap(std::string title) : Object(std::move(title)) {}
+    explicit Wrap(std::string title)
+        : Object(std::move(title))
+    {
+    }
 
     virtual void wrapMeThat(Object* gift);
 
@@ -19,10 +22,13 @@ public:
 };
 
 class Box : public Wrap {
-    bool is_open{true};
+    bool is_open { true };
 
 public:
-    explicit Box(std::string title) : Wrap(std::move(title)) {}
+    explicit Box(std::string title)
+        : Wrap(std::move(title))
+    {
+    }
 
     void wrapMeThat(Object* gift) override;
 
@@ -35,7 +41,10 @@ public:
 
 class GiftPaper : public Wrap {
 public:
-    explicit GiftPaper(std::string title) : Wrap(std::move(title)) {}
+    explicit GiftPaper(std::string title)
+        : Wrap(std::move(title))
+    {
+    }
 
     void Serialize(pugi::xml_node node) override;
 };

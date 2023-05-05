@@ -1,6 +1,7 @@
-#include <utility>
+#pragma once
 
 #include "IConveyorBelt.h"
+#include <utility>
 
 class PapaXmasConveyorBelt : public IConveyorBelt {
 public:
@@ -24,7 +25,10 @@ class MagicalCarpet : public ConveyorBeltRand {
     std::string ip;
 
 public:
-    explicit MagicalCarpet(std::string ip) : ip(std::move(ip)) {}
+    explicit MagicalCarpet(std::string ip)
+        : ip(std::move(ip))
+    {
+    }
 
     void out() override;
 };

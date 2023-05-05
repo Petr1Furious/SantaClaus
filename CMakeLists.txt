@@ -29,7 +29,7 @@ add_executable(send_gifts
 target_link_libraries(send_gifts ${USED_LIBS})
 
 add_executable(santa
-        santa.cpp
+        Santa.cpp
         Object.cpp
         Toy.cpp
         Wrap.cpp

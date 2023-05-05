@@ -1,5 +1,7 @@
-#include "ITable.h"
+#pragma once
+
 #include "IConveyorBelt.h"
+#include "ITable.h"
 
 class IElf {
 protected:
@@ -7,7 +9,11 @@ protected:
     IConveyorBelt* conveyor_belt;
 
 public:
-    IElf(ITable* table, IConveyorBelt* conveyorBelt) : table(table), conveyor_belt(conveyorBelt) {}
+    IElf(ITable* table, IConveyorBelt* conveyorBelt)
+        : table(table)
+        , conveyor_belt(conveyorBelt)
+    {
+    }
 
     virtual bool wrapGift() = 0;
 

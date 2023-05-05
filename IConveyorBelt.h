@@ -1,12 +1,12 @@
 #pragma once
 
-#include <iostream>
 #include "Object.h"
 #include "Wrap.h"
+#include <iostream>
 
 class IConveyorBelt {
 protected:
-    Object* content{};
+    Object* content {};
 
 public:
     void put(Object* object);

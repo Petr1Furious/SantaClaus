@@ -1,11 +1,13 @@
-#include <iostream>
 #include "ITable.h"
+#include <iostream>
 
-size_t ITable::getSize() const {
+size_t ITable::getSize() const
+{
     return size;
 }
 
-void ITable::put(Object* object) {
+void ITable::put(Object* object)
+{
     if (size == TABLE_SIZE) {
         std::cerr << "The table collapsed!\n";
         return;
@@ -13,7 +15,8 @@ void ITable::put(Object* object) {
     objects[size++] = object;
 }
 
-Object* ITable::take(size_t num) {
+Object* ITable::take(size_t num)
+{
     if (num > size) {
         std::cerr << "Taking a non-existent object!\n";
         return nullptr;
@@ -31,15 +34,17 @@ Object* ITable::take(size_t num) {
     return res;
 }
 
-std::string* ITable::look() const {
-    auto* titles = new std::string[size + 1]{};
+std::string* ITable::look() const
+{
+    auto* titles = new std::string[size + 1] {};
     for (size_t i = 0; i < size; i++) {
         titles[i] = objects[i]->getTitle();
     }
     return titles;
 }
 
-ITable::~ITable() {
+ITable::~ITable()
+{
     for (auto& i : objects) {
         delete i;
     }

@@ -1,10 +1,11 @@
-#include <cstring>
-#include "Tables.h"
 #include "ConveyorBelts.h"
 #include "PapaXmasElf.h"
+#include "Tables.h"
 #include "include/pugixml.hpp"
+#include <cstring>
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     if (argc != 3 || strcmp(argv[1], "-w") != 0) {
         std::cerr << "Usage: " << argv[0] << " -w IP\n";
         return 1;

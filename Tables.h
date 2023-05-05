@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ITable.h"
 #include "Toy.h"
 

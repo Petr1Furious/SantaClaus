@@ -1,7 +1,8 @@
-#include <iostream>
 #include "Wrap.h"
+#include <iostream>
 
-void Wrap::wrapMeThat(Object* gift) {
+void Wrap::wrapMeThat(Object* gift)
+{
     if (content != nullptr) {
         std::cerr << "Wrap is not empty!\n";
         return;
@@ -9,17 +10,20 @@ void Wrap::wrapMeThat(Object* gift) {
     content = gift;
 }
 
-Object* Wrap::openMe() {
+Object* Wrap::openMe()
+{
     Object* res_content = content;
     content = nullptr;
     return res_content;
 }
 
-Wrap::~Wrap() {
+Wrap::~Wrap()
+{
     delete content;
 }
 
-void Wrap::Serialize(pugi::xml_node node) {
+void Wrap::Serialize(pugi::xml_node node)
+{
     Object::Serialize(node);
     node.set_name("Wrap");
     node.append_child("content");
@@ -28,7 +32,8 @@ void Wrap::Serialize(pugi::xml_node node) {
     }
 }
 
-void Box::wrapMeThat(Object* gift) {
+void Box::wrapMeThat(Object* gift)
+{
     if (!is_open) {
         std::cerr << "Box has to be open to wrap!\n";
         return;
@@ -37,23 +42,27 @@ void Box::wrapMeThat(Object* gift) {
     Wrap::wrapMeThat(gift);
 }
 
-Object* Box::openMe() {
+Object* Box::openMe()
+{
     is_open = true;
     return Wrap::openMe();
 }
 
-void Box::closeMe() {
+void Box::closeMe()
+{
     is_open = false;
 }
 
-void Box::Serialize(pugi::xml_node node) {
+void Box::Serialize(pugi::xml_node node)
+{
     Wrap::Serialize(node);
     node.set_name("Box");
     node.append_attribute("is_open");
     node.attribute("is_open").set_value(is_open);
 }
 
-Object* MyUnitTests(Object** objects) {
+Object* MyUnitTests(Object** objects)
+{
     auto* box = dynamic_cast<Box*>(objects[1]);
     auto* gift_paper = dynamic_cast<GiftPaper*>(objects[2]);
 
@@ -64,7 +73,8 @@ Object* MyUnitTests(Object** objects) {
     return gift_paper;
 }
 
-void GiftPaper::Serialize(pugi::xml_node node) {
+void GiftPaper::Serialize(pugi::xml_node node)
+{
     Wrap::Serialize(node);
     node.set_name("GiftPaper");
 }

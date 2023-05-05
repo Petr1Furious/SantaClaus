@@ -1,15 +1,18 @@
-#include <cassert>
 #include "Toy.h"
+#include <cassert>
 
-void Teddy::isTaken() const {
+void Teddy::isTaken() const
+{
     std::cout << "gra hu\n";
 }
 
-void LittlePony::isTaken() const {
+void LittlePony::isTaken() const
+{
     std::cout << "yo man\n";
 }
 
-Object** MyUnitTests() {
+Object** MyUnitTests()
+{
     auto** objects = new Object*[2];
     objects[0] = new LittlePony("happy pony");
     objects[1] = new Teddy("cuddles");
@@ -19,17 +22,20 @@ Object** MyUnitTests() {
     return objects;
 }
 
-void Toy::Serialize(pugi::xml_node node) {
+void Toy::Serialize(pugi::xml_node node)
+{
     Object::Serialize(node);
     node.set_name("Toy");
 }
 
-void Teddy::Serialize(pugi::xml_node node) {
+void Teddy::Serialize(pugi::xml_node node)
+{
     Toy::Serialize(node);
     node.set_name("Teddy");
 }
 
-void LittlePony::Serialize(pugi::xml_node node) {
+void LittlePony::Serialize(pugi::xml_node node)
+{
     Toy::Serialize(node);
     node.set_name("LittlePony");
 }

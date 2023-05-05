@@ -1,13 +1,14 @@
+#include "ConveyorBelts.h"
+#include <boost/asio.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 #include <chrono>
 #include <random>
 #include <sstream>
-#include <boost/asio.hpp>
-#include <boost/exception/diagnostic_information.hpp>
-#include "ConveyorBelts.h"
 
 using boost::asio::ip::udp;
 
-void PapaXmasConveyorBelt::in() {
+void PapaXmasConveyorBelt::in()
+{
     if (content != nullptr) {
         std::cerr << "Conveyor belt is not empty!\n";
         return;
@@ -16,7 +17,8 @@ void PapaXmasConveyorBelt::in() {
     content = dynamic_cast<Object*>(new Wrap("wrap"));
 }
 
-void PapaXmasConveyorBelt::out() {
+void PapaXmasConveyorBelt::out()
+{
     if (content == nullptr) {
         std::cerr << "Conveyor belt is empty!\n";
         return;
@@ -26,11 +28,13 @@ void PapaXmasConveyorBelt::out() {
     content = nullptr;
 }
 
-IConveyorBelt* createConveyorBelt() {
+IConveyorBelt* createConveyorBelt()
+{
     return dynamic_cast<IConveyorBelt*>(new PapaXmasConveyorBelt());
 }
 
-void ConveyorBeltRand::in() {
+void ConveyorBeltRand::in()
+{
     if (content != nullptr) {
         std::cerr << "Conveyor belt is not empty!\n";
         return;
@@ -45,7 +49,8 @@ void ConveyorBeltRand::in() {
     }
 }
 
-void ConveyorBeltRand::out() {
+void ConveyorBeltRand::out()
+{
     if (content == nullptr) {
         std::cerr << "Conveyor belt is empty!\n";
         return;
@@ -59,11 +64,13 @@ void ConveyorBeltRand::out() {
     content = nullptr;
 }
 
-IConveyorBelt* createConveyorBeltRand() {
+IConveyorBelt* createConveyorBeltRand()
+{
     return dynamic_cast<IConveyorBelt*>(new ConveyorBeltRand());
 }
 
-void MagicalCarpet::out() {
+void MagicalCarpet::out()
+{
     if (content == nullptr) {
         std::cerr << "Magical carpet is empty!\n";
         return;
@@ -93,6 +100,7 @@ void MagicalCarpet::out() {
     content = nullptr;
 }
 
-IConveyorBelt* createMagicalCarpet(std::string ip) {
+IConveyorBelt* createMagicalCarpet(std::string ip)
+{
     return dynamic_cast<IConveyorBelt*>(new MagicalCarpet(std::move(ip)));
 }

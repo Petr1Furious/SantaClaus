@@ -1,12 +1,15 @@
 #pragma once
 
+#include "Object.h"
 #include <iostream>
 #include <utility>
-#include "Object.h"
 
 class Toy : public Object {
 public:
-    explicit Toy(std::string title) : Object(std::move(title)) {}
+    explicit Toy(std::string title)
+        : Object(std::move(title))
+    {
+    }
 
     virtual void isTaken() const = 0;
 
@@ -17,7 +20,10 @@ public:
 
 class Teddy : public Toy {
 public:
-    explicit Teddy(std::string title) : Toy(std::move(title)) {}
+    explicit Teddy(std::string title)
+        : Toy(std::move(title))
+    {
+    }
 
     void isTaken() const override;
 
@@ -26,7 +32,10 @@ public:
 
 class LittlePony : public Toy {
 public:
-    explicit LittlePony(std::string title) : Toy(std::move(title)) {}
+    explicit LittlePony(std::string title)
+        : Toy(std::move(title))
+    {
+    }
 
     void isTaken() const override;
 

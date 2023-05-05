@@ -1,16 +1,17 @@
-#include <iostream>
-#include <boost/asio.hpp>
-#include <boost/exception/diagnostic_information.hpp>
-#include "include/pugixml.hpp"
 #include "Object.h"
 #include "Toy.h"
 #include "Wrap.h"
+#include "include/pugixml.hpp"
+#include <boost/asio.hpp>
+#include <boost/exception/diagnostic_information.hpp>
+#include <iostream>
 
 static const size_t MAX_BUFFER_SIZE = 1500;
 
 using boost::asio::ip::udp;
 
-Object* Deserialize(pugi::xml_node node) {
+Object* Deserialize(pugi::xml_node node)
+{
     if (strcmp(node.name(), "Object") == 0) {
         return new Object(node.attribute("title").as_string());
     }
@@ -22,9 +23,7 @@ Object* Deserialize(pugi::xml_node node) {
         return new LittlePony(node.attribute("title").as_string());
     }
 
-    if (strcmp(node.name(), "Wrap") == 0 ||
-        strcmp(node.name(), "Box") == 0 ||
-        strcmp(node.name(), "GiftPaper") == 0) {
+    if (strcmp(node.name(), "Wrap") == 0 || strcmp(node.name(), "Box") == 0 || strcmp(node.name(), "GiftPaper") == 0) {
         Wrap* wrap;
         if (strcmp(node.name(), "Wrap") == 0) {
             wrap = new Wrap(node.attribute("title").as_string());
@@ -48,7 +47,8 @@ Object* Deserialize(pugi::xml_node node) {
     return nullptr;
 }
 
-void takeXML(const pugi::xml_document& doc) {
+void takeXML(const pugi::xml_document& doc)
+{
     Wrap* wrap;
     if ((wrap = dynamic_cast<Wrap*>(Deserialize(*doc.children().begin()))) == nullptr) {
         std::cerr << "XML must represent a wrapped gift!\n";
@@ -66,7 +66,8 @@ void takeXML(const pugi::xml_document& doc) {
     delete wrap;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     if (argc == 3 && strcmp(argv[1], "-w") == 0) {
         std::string ip = argv[2];
         int32_t port = 13131;
@@ -94,8 +95,7 @@ int main(int argc, char* argv[]) {
 
                 takeXML(doc);
             }
-        }
-        catch (const boost::exception& e) {
+        } catch (const boost::exception& e) {
             std::cerr << "Error. Reason: " << boost::diagnostic_information(e) << '\n';
         }
     }

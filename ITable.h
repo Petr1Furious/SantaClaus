@@ -6,8 +6,8 @@ static const size_t TABLE_SIZE = 10;
 
 class ITable {
 protected:
-    size_t size{};
-    Object* objects[TABLE_SIZE]{};
+    size_t size {};
+    Object* objects[TABLE_SIZE] {};
 
 public:
     virtual void init() = 0;

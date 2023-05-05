@@ -1,8 +1,9 @@
-#include <iostream>
 #include "PapaXmasElf.h"
 #include "Toy.h"
+#include <iostream>
 
-bool PapaXmasElf::wrapGift() {
+bool PapaXmasElf::wrapGift()
+{
     Object* object = table->take(table->getSize() - 1);
     Toy* toy;
     if ((toy = dynamic_cast<Toy*>(object)) != nullptr) {
@@ -37,7 +38,8 @@ bool PapaXmasElf::wrapGift() {
     return true;
 }
 
-bool PapaXmasElf::wrapAllGifts() {
+bool PapaXmasElf::wrapAllGifts()
+{
     while (table->getSize() > 0) {
         if (!wrapGift()) {
             return false;
