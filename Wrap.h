@@ -13,7 +13,7 @@ public:
 
     virtual Object* openMe();
 
-    ~Wrap() override = default;
+    ~Wrap() override;
 
     void Serialize(pugi::xml_node node) override;
 };

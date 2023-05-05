@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Tables.h"
 #include "ConveyorBelts.h"
 #include "PapaXmasElf.h"

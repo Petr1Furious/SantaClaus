@@ -15,12 +15,16 @@ Object* Wrap::openMe() {
     return res_content;
 }
 
+Wrap::~Wrap() {
+    delete content;
+}
+
 void Wrap::Serialize(pugi::xml_node node) {
     Object::Serialize(node);
     node.set_name("Wrap");
-    node.append_child("Content");
+    node.append_child("content");
     if (content != nullptr) {
-        content->Serialize(node.child("Content"));
+        content->Serialize(node.child("content").append_child());
     }
 }
 
